@@ -2,14 +2,13 @@
 const path = require("path");
 
 const CopyPlugin = require("copy-webpack-plugin");
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const nodeExternals = require("webpack-node-externals");
 
 function abs(...args) {
   return path.join(__dirname, ...args);
 }
-
-console.log(process.env.ENABLE_ANALYZER)
 
 const SRC_ROOT = abs("./src");
 const PUBLIC_ROOT = abs("./public");
@@ -19,10 +18,10 @@ const DIST_PUBLIC = abs("./dist/public");
 const plugins = [
   new CopyPlugin({
     patterns: [{ from: PUBLIC_ROOT, to: DIST_PUBLIC }],
-  })
-]
-if (process.env.ENABLE_ANALYZER === 'true') {
-  plugins.push(new BundleAnalyzerPlugin())
+  }),
+];
+if (process.env.ENABLE_ANALYZER === "true") {
+  plugins.push(new BundleAnalyzerPlugin());
 }
 
 /** @type {Array<import('webpack').Configuration>} */

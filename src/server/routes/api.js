@@ -7,7 +7,6 @@ import { BettingTicket, Race, User } from "../../model/index.js";
 import { createConnection } from "../typeorm/connection.js";
 import { initialize } from "../typeorm/initialize.js";
 
-
 /**
  * @type {import('fastify').FastifyPluginCallback}
  */
@@ -168,7 +167,7 @@ export const apiRoute = async (fastify) => {
   });
 
   fastify.get("/banks", async (req, res) => {
-    res.send(zenginCode)
+    res.send(zenginCode);
   });
 
   fastify.post("/initialize", async (_req, res) => {

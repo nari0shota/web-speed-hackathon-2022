@@ -67,12 +67,14 @@ export const ChargeDialog = forwardRef(({ onComplete }, ref) => {
     },
     [charge, bankCode, branchCode, accountNo, amount, onComplete, clearForm],
   );
-  const {data: zenginCode, loading} = useFetch('/api/banks', jsonFetcher)
+  const { data: zenginCode, loading } = useFetch("/api/banks", jsonFetcher);
 
-  const bankList = loading ? [] : Object.entries(zenginCode).map(([code, { name }]) => ({
-    code,
-    name,
-  }));
+  const bankList = loading
+    ? []
+    : Object.entries(zenginCode).map(([code, { name }]) => ({
+        code,
+        name,
+      }));
   const bank = loading ? undefined : zenginCode[bankCode];
   const branch = bank?.branches[branchCode];
 
