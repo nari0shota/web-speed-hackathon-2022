@@ -2,6 +2,7 @@
 const path = require("path");
 
 const CopyPlugin = require("copy-webpack-plugin");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const nodeExternals = require("webpack-node-externals");
 
 function abs(...args) {
@@ -16,7 +17,6 @@ const DIST_PUBLIC = abs("./dist/public");
 /** @type {Array<import('webpack').Configuration>} */
 module.exports = [
   {
-    devtool: "inline-source-map",
     entry: path.join(SRC_ROOT, "client/index.jsx"),
     mode: "development",
     module: {
@@ -57,6 +57,7 @@ module.exports = [
       new CopyPlugin({
         patterns: [{ from: PUBLIC_ROOT, to: DIST_PUBLIC }],
       }),
+      new BundleAnalyzerPlugin()
     ],
     resolve: {
       extensions: [".js", ".jsx"],
@@ -64,7 +65,6 @@ module.exports = [
     target: "web",
   },
   {
-    devtool: "inline-source-map",
     entry: path.join(SRC_ROOT, "server/index.js"),
     externals: [nodeExternals()],
     mode: "development",
